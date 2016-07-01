@@ -15,11 +15,13 @@ import com.is.see.mvp.presenter.CitiesPresenterImpl;
 import com.is.see.mvp.view.CitiesView;
 import com.is.see.protocol.CitiesResponse;
 import com.is.see.ui.adapters.CityAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import me.yokeyword.indexablelistview.IndexEntity;
 import me.yokeyword.indexablelistview.IndexHeaderEntity;
 import me.yokeyword.indexablelistview.IndexableStickyListView;
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -60,14 +62,8 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
     @Override
     public void getCities(CitiesResponse response) {
         mCities=response.getCities();
-        Log.e(TAG_LOG,mCities.size()+"");
         for (Cities cities:mCities){
-            Log.e(TAG_LOG,cities.getCity_id()+"");
-            Log.e(TAG_LOG,cities.getCity_name()+"");
-            Log.e(TAG_LOG,cities.getCity_pinyin()+"");
             Log.e(TAG_LOG,cities.getName()+"");
-            Log.e(TAG_LOG,cities.getShort_name()+"");
-            Log.e(TAG_LOG,cities.getShort_pinyin()+"");
         }
 
         setTitle("选择城市");
@@ -84,9 +80,7 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
 
         // 添加定位城市Header
         ArrayList<Cities> gpsIndexEntityList = new ArrayList<>();
-        final Cities gpsEntity = new Cities();
-        gpsEntity.setName("定位中...");
-        gpsEntity.setCity_name("定位中...");
+        final Cities gpsEntity = new Cities("定位中...",-1,"杭州市","杭州市","pinyin","pinyin");
         gpsIndexEntityList.add(gpsEntity);
         IndexHeaderEntity<Cities> gpsHeader = new IndexHeaderEntity<>("定", "GPS自动定位", gpsIndexEntityList);
 
@@ -94,9 +88,7 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
         IndexHeaderEntity<Cities> hotHeader = new IndexHeaderEntity<>();
         ArrayList<Cities> hotIndexEntityList = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
-            Cities hotEntity = new Cities();
-            hotEntity.setName(mHotCities[i]);
-            hotEntity.setCity_name(mHotCities[i]);
+            Cities hotEntity = new Cities(mHotCities[i],i,mHotCities[i],mHotCities[i],"pinyin","pinyin");
             hotIndexEntityList.add(hotEntity);
         }
 

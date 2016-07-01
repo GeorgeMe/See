@@ -13,6 +13,15 @@ public class Cities extends IndexEntity {
     private String city_pinyin;
     private String short_pinyin;
 
+    public Cities(String name, Number city_id, String city_name, String short_name, String city_pinyin, String short_pinyin) {
+        super(name);
+        this.city_id = city_id;
+        this.city_name = city_name;
+        this.short_name = short_name;
+        this.city_pinyin = city_pinyin;
+        this.short_pinyin = short_pinyin;
+    }
+
     public Number getCity_id() {
         return city_id;
     }
@@ -51,15 +60,5 @@ public class Cities extends IndexEntity {
 
     public void setShort_pinyin(String short_pinyin) {
         this.short_pinyin = short_pinyin;
-    }
-
-    @Override
-    public void setName(String name) {
-        super.setName(getCity_name());
-    }
-
-    @Override
-    public String getName() {
-        return this.getCity_name();
     }
 }
