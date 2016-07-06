@@ -22,9 +22,15 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:recyclerview-v7:23.3.0'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.github.promeg:tinypinyin:1.0.0'
     compile 'me.yokeyword:indexablestickylistview:0.6.1'//字母索引的功能
     compile 'com.github.markushi:android-ui:1.2'
 
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.6.1@aar'
 }
