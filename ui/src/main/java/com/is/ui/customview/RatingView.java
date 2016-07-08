@@ -1,4 +1,4 @@
-package com.is.ui.widget;
+package com.is.ui.customview;
 
 import android.annotation.TargetApi;
 import android.content.Context;
