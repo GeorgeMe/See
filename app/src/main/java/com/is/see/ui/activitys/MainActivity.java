@@ -5,19 +5,24 @@ import android.widget.TextView;
 
 import com.is.see.R;
 import com.is.see.base.BaseActivity;
-import com.is.see.entity.User;
+import com.is.see.ui.filter.DropMenuAdapter;
+import com.is.see.ui.filter.entity.FilterUrl;
+import com.is.ui.filter.DropDownMenu;
+import com.is.ui.filter.interfaces.OnFilterDoneListener;
 
 import butterknife.Bind;
 
-public class MainActivity extends BaseActivity {
-    @Bind(R.id.tv_show)
-    TextView tvShow;
+public class MainActivity extends BaseActivity implements OnFilterDoneListener {
 
-    private String msg;
+    @Bind(R.id.dropDownMenu)
+    DropDownMenu dropDownMenu;
+
+    @Bind(R.id.mFilterContentView)
+    TextView mFilterContentView;
 
     @Override
     protected void getBundleExtras(Bundle extras) {
-        msg = extras.getString("msg");
+
     }
 
     @Override
@@ -27,13 +32,31 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initViewsAndEvents() {
-        if(msg!=null){
-            tvShow.setText(msg);
-        }
+        initFilterDropDownView();
     }
 
     @Override
     protected TransitionMode getOverridePendingTransitionMode() {
         return TransitionMode.RIGHT;
+    }
+
+    private void initFilterDropDownView() {
+        String[] titleList = new String[]{"第一个", "第二个", "第三个", "第四个"};
+        dropDownMenu.setMenuAdapter(new DropMenuAdapter(this, titleList, this));
+    }
+    @Override
+    public void onFilterDone(int position, String positionTitle, String urlValue) {
+        if (position != 3) {
+            dropDownMenu.setPositionIndicatorText(FilterUrl.instance().position, FilterUrl.instance().positionTitle);
+        }
+
+        dropDownMenu.close();
+        mFilterContentView.setText(FilterUrl.instance().toString());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FilterUrl.instance().clear();
     }
 }

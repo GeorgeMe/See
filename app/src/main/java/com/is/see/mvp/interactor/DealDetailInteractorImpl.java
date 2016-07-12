@@ -25,7 +25,7 @@ public class DealDetailInteractorImpl extends Retrofit2See implements CommonSing
     @Override
     public void getCommonSingleData(JSONObject json) {
 
-        Call<DealDetailResponse> call = apiConstants.dealdetail((Number) json.opt("deal_id"));
+        Call<DealDetailResponse> call = seeApi.dealdetail((Number) json.opt("deal_id"));
         call.enqueue(new Callback<DealDetailResponse>() {
             @Override
             public void onResponse(Call<DealDetailResponse> call, Response<DealDetailResponse> response) {

@@ -27,7 +27,7 @@ public class CitiesInteractorImpl extends Retrofit2See implements CommonSingleIn
     @Override
     public void getCommonSingleData(JSONObject json) {
 
-        Call<CitiesResponse> call = apiConstants.cities();
+        Call<CitiesResponse> call = seeApi.cities();
         call.enqueue(new Callback<CitiesResponse>() {
             @Override
             public void onResponse(Call<CitiesResponse> call, Response<CitiesResponse> response) {

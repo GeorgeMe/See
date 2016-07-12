@@ -1,6 +1,6 @@
 package com.is.see.base;
 
-import com.is.see.api.ApiConstants;
+import com.is.see.api.SeeApi;
 
 import java.io.IOException;
 
@@ -19,7 +19,7 @@ public class Retrofit2See {
 
     protected String baseUrl="http://apis.baidu.com/baidunuomi/openapi/";
     protected Retrofit retrofit;
-    protected ApiConstants apiConstants;
+    protected SeeApi seeApi;
 
     public Retrofit2See() {
         if (retrofit==null) {
@@ -40,7 +40,7 @@ public class Retrofit2See {
                     .client(client)
                     .build();
         }
-        apiConstants = retrofit.create(ApiConstants.class);
+        seeApi = retrofit.create(SeeApi.class);
     }
 
    /* public String getBaseUrl() {
@@ -82,8 +82,9 @@ public class Retrofit2See {
                 Request originalRequest = chain.request();
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         // Provide your custom header here
-                        .header("AppType", "TPOS")
+                        .header("Content-Type", "application/json")
                         .header("Accept", "application/json")
+                        .header("apikey", "afd4c07e56a3f661aac83c1dc8e0fe7f")
                         .method(originalRequest.method(), originalRequest.body());
                 Request request = requestBuilder.build();
                 return chain.proceed(request);

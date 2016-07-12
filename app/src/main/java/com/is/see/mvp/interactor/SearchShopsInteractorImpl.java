@@ -25,7 +25,7 @@ public class SearchShopsInteractorImpl extends Retrofit2See implements CommonLis
     @Override
     public void getCommonListData(final int event, JSONObject json){
 
-        Call<SearchShopsResponse> call = apiConstants.searchshops(
+        Call<SearchShopsResponse> call = seeApi.searchshops(
                 (Number) json.opt("city_id"),
                 json.optString("cat_ids"),
                 json.optString("subcat_ids"),

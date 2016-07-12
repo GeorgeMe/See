@@ -24,7 +24,7 @@ public class ShopDealsInteractorImpl extends Retrofit2See implements CommonSingl
     @Override
     public void getCommonSingleData(JSONObject json) {
 
-        Call<ShopDealsResponse> call = apiConstants.shopdeals(json.optString("shop_id"));
+        Call<ShopDealsResponse> call = seeApi.shopdeals(json.optString("shop_id"));
         call.enqueue(new Callback<ShopDealsResponse>() {
             @Override
             public void onResponse(Call<ShopDealsResponse> call, Response<ShopDealsResponse> response) {

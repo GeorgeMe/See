@@ -25,7 +25,7 @@ public class DistrictsInteractorImpl extends Retrofit2See implements CommonSingl
     @Override
     public void getCommonSingleData(JSONObject json) {
 
-        Call<DistrictsResponse> call = apiConstants.districts((Number) json.opt("city_id"));
+        Call<DistrictsResponse> call = seeApi.districts((Number) json.opt("city_id"));
         call.enqueue(new Callback<DistrictsResponse>() {
             @Override
             public void onResponse(Call<DistrictsResponse> call, Response<DistrictsResponse> response) {

@@ -25,7 +25,7 @@ public class CategoriesInteractorImpl extends Retrofit2See implements CommonSing
     @Override
     public void getCommonSingleData(JSONObject json) {
 
-        Call<CategoriesResponse> call = apiConstants.categories();
+        Call<CategoriesResponse> call = seeApi.categories();
         call.enqueue(new Callback<CategoriesResponse>() {
             @Override
             public void onResponse(Call<CategoriesResponse> call, Response<CategoriesResponse> response) {
