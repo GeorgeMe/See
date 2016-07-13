@@ -3,6 +3,7 @@ package com.is.see.util;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
@@ -51,4 +52,9 @@ public final class DialogFactory {
         return createProgressDialog(context, context.getString(messageResource));
     }
 
+    public static Dialog createCustomviewDialog(Context context, @LayoutRes int layoutResource){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context)
+                .setView(layoutResource);
+        return alertDialog.create();
+    }
 }

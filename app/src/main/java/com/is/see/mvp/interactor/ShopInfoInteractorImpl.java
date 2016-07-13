@@ -1,5 +1,7 @@
 package com.is.see.mvp.interactor;
 
+import android.content.Context;
+
 import com.is.see.base.Retrofit2See;
 import com.is.see.mvp.listeners.BaseSingleLoadedListener;
 import com.is.see.mvp.listeners.CommonSingleInteractor;
@@ -18,7 +20,8 @@ public class ShopInfoInteractorImpl extends Retrofit2See implements CommonSingle
 
     private BaseSingleLoadedListener<ShopInfoResponse> loadedListener;
 
-    public ShopInfoInteractorImpl(BaseSingleLoadedListener<ShopInfoResponse> loadedListener) {
+    public ShopInfoInteractorImpl(Context context, BaseSingleLoadedListener<ShopInfoResponse> loadedListener) {
+        super(context);
         this.loadedListener = loadedListener;
     }
 

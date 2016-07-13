@@ -1,5 +1,7 @@
 package com.is.see.mvp.interactor;
 
+import android.content.Context;
+
 import com.is.see.base.Retrofit2See;
 import com.is.see.mvp.listeners.BaseSingleLoadedListener;
 import com.is.see.mvp.listeners.CommonSingleInteractor;
@@ -18,7 +20,8 @@ public class DealDetailInteractorImpl extends Retrofit2See implements CommonSing
 
     private BaseSingleLoadedListener<DealDetailResponse> loadedListener;
 
-    public DealDetailInteractorImpl(BaseSingleLoadedListener<DealDetailResponse> loadedListener) {
+    public DealDetailInteractorImpl(Context context, BaseSingleLoadedListener<DealDetailResponse> loadedListener) {
+        super(context);
         this.loadedListener = loadedListener;
     }
 

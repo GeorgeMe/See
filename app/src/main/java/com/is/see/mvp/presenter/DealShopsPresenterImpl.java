@@ -1,5 +1,7 @@
 package com.is.see.mvp.presenter;
 
+import android.content.Context;
+
 import com.is.see.mvp.interactor.DealShopsInteractorImpl;
 import com.is.see.mvp.listeners.BaseSingleLoadedListener;
 import com.is.see.mvp.view.DealShopsView;
@@ -12,19 +14,22 @@ import org.json.JSONObject;
  * Created by George on 2016/5/21.
  */
 public class DealShopsPresenterImpl implements BaseSingleLoadedListener<DealShopsResponse> {
-
+    private Context mContext = null;
     private DealShopsInteractorImpl dealShopsInteractor;
     private DealShopsView dealShopsView;
-    public DealShopsPresenterImpl(DealShopsView dealShopsView) {
-        this.dealShopsView=dealShopsView;
-        dealShopsInteractor=new DealShopsInteractorImpl(this);
 
+    public DealShopsPresenterImpl(Context mContext, DealShopsView dealShopsView) {
+        this.mContext = mContext;
+        this.dealShopsView = dealShopsView;
+        dealShopsInteractor=new DealShopsInteractorImpl(mContext,this);
     }
-    public void onSignIn(String shop_id,String password){
+
+    public void getDealShops(Number city_id, Number deal_id){
         dealShopsView.showLoading(null);
         try {
             JSONObject json=new JSONObject();
-            json.put("shop_id","1745896");
+            json.put("city_id",city_id);
+            json.put("deal_id",deal_id);
             dealShopsInteractor.getCommonSingleData(json);
         }catch (JSONException j){
             dealShopsView.hideLoading();
@@ -33,7 +38,12 @@ public class DealShopsPresenterImpl implements BaseSingleLoadedListener<DealShop
     @Override
     public void onSuccess(DealShopsResponse data) {
         dealShopsView.hideLoading();
-        dealShopsView.getDealShops(data);
+        if (data.getErrno()!=0){
+            dealShopsView.showError(data.getMsg());
+        }else {
+            dealShopsView.getDealShops(data.getShops());
+        }
+
     }
 
     @Override

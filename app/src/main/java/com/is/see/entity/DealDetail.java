@@ -1,11 +1,14 @@
 package com.is.see.entity;
 
+import com.orm.SugarRecord;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by George on 2016/6/15.
  */
-public class DealDetail {
+public class DealDetail extends SugarRecord implements Serializable {
 
     private int deal_id;
     private String title;
@@ -40,6 +43,42 @@ public class DealDetail {
     private List<Integer> subcat_ids;
     private List<List<String>> consumer_tips_constructed;
     private List<Integer> shop_ids;
+
+    public DealDetail(int deal_id, String title, String min_title, String description, String long_title, int publish_time, int purchase_deadline, int coupon_start_time, int coupon_end_time, int cat_id, int market_price, int current_price, Object promotion_price, int sale_num, boolean is_reservation_required, int person_upper, int person_lower, String image, String mid_image, String tiny_image, String deal_url, String deal_murl, String buy_contents, String buy_contents_json, String consumer_tips, String consumer_tips_json, String buy_details, String shop_description, int update_time, List<Integer> city_ids, List<Integer> subcat_ids, List<List<String>> consumer_tips_constructed, List<Integer> shop_ids) {
+        this.deal_id = deal_id;
+        this.title = title;
+        this.min_title = min_title;
+        this.description = description;
+        this.long_title = long_title;
+        this.publish_time = publish_time;
+        this.purchase_deadline = purchase_deadline;
+        this.coupon_start_time = coupon_start_time;
+        this.coupon_end_time = coupon_end_time;
+        this.cat_id = cat_id;
+        this.market_price = market_price;
+        this.current_price = current_price;
+        this.promotion_price = promotion_price;
+        this.sale_num = sale_num;
+        this.is_reservation_required = is_reservation_required;
+        this.person_upper = person_upper;
+        this.person_lower = person_lower;
+        this.image = image;
+        this.mid_image = mid_image;
+        this.tiny_image = tiny_image;
+        this.deal_url = deal_url;
+        this.deal_murl = deal_murl;
+        this.buy_contents = buy_contents;
+        this.buy_contents_json = buy_contents_json;
+        this.consumer_tips = consumer_tips;
+        this.consumer_tips_json = consumer_tips_json;
+        this.buy_details = buy_details;
+        this.shop_description = shop_description;
+        this.update_time = update_time;
+        this.city_ids = city_ids;
+        this.subcat_ids = subcat_ids;
+        this.consumer_tips_constructed = consumer_tips_constructed;
+        this.shop_ids = shop_ids;
+    }
 
     public int getDeal_id() {
         return deal_id;

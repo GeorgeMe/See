@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">See</string>
 
+    <string name="please_later_on">请稍后...</string>
+
     <string name="dialog_action_ok">OK</string>
     <string name="dialog_action_cancel">Cancel</string>
     <string name="dialog_error_title">Sorry</string>

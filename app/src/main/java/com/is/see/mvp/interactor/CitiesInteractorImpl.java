@@ -1,5 +1,6 @@
 package com.is.see.mvp.interactor;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.is.see.base.Retrofit2See;
@@ -20,7 +21,8 @@ public class CitiesInteractorImpl extends Retrofit2See implements CommonSingleIn
 
     private BaseSingleLoadedListener<CitiesResponse> loadedListener;
 
-    public CitiesInteractorImpl(BaseSingleLoadedListener<CitiesResponse> loadedListener) {
+    public CitiesInteractorImpl(Context context, BaseSingleLoadedListener<CitiesResponse> loadedListener) {
+        super(context);
         this.loadedListener = loadedListener;
     }
 

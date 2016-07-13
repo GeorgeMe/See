@@ -1,5 +1,7 @@
 package com.is.see.mvp.interactor;
 
+import android.content.Context;
+
 import com.is.see.base.Retrofit2See;
 import com.is.see.mvp.listeners.BaseMultiLoadedListener;
 import com.is.see.mvp.listeners.CommonListInteractor;
@@ -18,7 +20,8 @@ public class SearchDealsInteractorImpl extends Retrofit2See implements CommonLis
 
     private BaseMultiLoadedListener<SearchDealsResponse> loadedListener;
 
-    public SearchDealsInteractorImpl(BaseMultiLoadedListener<SearchDealsResponse> loadedListener) {
+    public SearchDealsInteractorImpl(Context context, BaseMultiLoadedListener<SearchDealsResponse> loadedListener) {
+        super(context);
         this.loadedListener = loadedListener;
     }
 

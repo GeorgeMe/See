@@ -15,8 +15,9 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
+import com.is.common.CommonUtils;
 import com.is.ui.R;
-import com.is.ui.util.CommonUtils;
+
 
 
 public class BrowserLayout extends LinearLayout {

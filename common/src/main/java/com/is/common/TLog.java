@@ -1,4 +1,4 @@
-package com.is.ui.util;
+package com.is.common;
 
 import android.os.Environment;
 import android.util.Log;

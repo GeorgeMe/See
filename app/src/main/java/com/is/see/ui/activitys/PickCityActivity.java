@@ -13,7 +13,6 @@ import com.is.see.base.BaseActivity;
 import com.is.see.entity.Cities;
 import com.is.see.mvp.presenter.CitiesPresenterImpl;
 import com.is.see.mvp.view.CitiesView;
-import com.is.see.protocol.CitiesResponse;
 import com.is.see.ui.adapters.CityAdapter;
 
 import java.util.ArrayList;
@@ -50,7 +49,7 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
     @Override
     protected void initViewsAndEvents() {
         // 初始化数据
-        citiesPresenter=new CitiesPresenterImpl(this);
+        citiesPresenter=new CitiesPresenterImpl(mContext,this);
         citiesPresenter.getCities();
     }
 
@@ -60,10 +59,10 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
     }
 
     @Override
-    public void getCities(CitiesResponse response) {
-        mCities=response.getCities();
-        for (Cities cities:mCities){
-            Log.e(TAG_LOG,cities.getName()+"");
+    public void getCities(List<Cities> cities) {
+        mCities=cities;
+        for (Cities cities1:mCities){
+            Log.e(TAG_LOG,cities1.getName()+"");
         }
 
         setTitle("选择城市");

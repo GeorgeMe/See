@@ -1,9 +1,13 @@
 package com.is.see.entity;
 
+import com.orm.SugarRecord;
+
+import java.io.Serializable;
+
 /**
  * Created by George on 2016/6/15.
  */
-public class ShopInfo {
+public class ShopInfo extends SugarRecord implements Serializable {
     private int shop_id;
     private int city_id;
     private String shop_name;
@@ -20,6 +24,25 @@ public class ShopInfo {
     private double baidu_latitude;
     private String traffic_info;
     private int update_time;
+
+    public ShopInfo(int shop_id, int city_id, String shop_name, String shop_url, String shop_murl, String address, int district_id, int bizarea_id, String phone, String open_time, double longitude, double latitude, double baidu_longitude, double baidu_latitude, String traffic_info, int update_time) {
+        this.shop_id = shop_id;
+        this.city_id = city_id;
+        this.shop_name = shop_name;
+        this.shop_url = shop_url;
+        this.shop_murl = shop_murl;
+        this.address = address;
+        this.district_id = district_id;
+        this.bizarea_id = bizarea_id;
+        this.phone = phone;
+        this.open_time = open_time;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.baidu_longitude = baidu_longitude;
+        this.baidu_latitude = baidu_latitude;
+        this.traffic_info = traffic_info;
+        this.update_time = update_time;
+    }
 
     public int getShop_id() {
         return shop_id;

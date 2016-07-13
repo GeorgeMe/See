@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 
-import com.is.ui.util.TLog;
+import com.is.common.TLog;
 
 import java.util.ArrayList;
 

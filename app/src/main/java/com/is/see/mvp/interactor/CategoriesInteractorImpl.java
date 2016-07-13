@@ -1,5 +1,7 @@
 package com.is.see.mvp.interactor;
 
+import android.content.Context;
+
 import com.is.see.base.Retrofit2See;
 import com.is.see.mvp.listeners.BaseSingleLoadedListener;
 import com.is.see.mvp.listeners.CommonSingleInteractor;
@@ -18,7 +20,8 @@ public class CategoriesInteractorImpl extends Retrofit2See implements CommonSing
 
     private BaseSingleLoadedListener<CategoriesResponse> loadedListener;
 
-    public CategoriesInteractorImpl(BaseSingleLoadedListener<CategoriesResponse> loadedListener) {
+    public CategoriesInteractorImpl(Context context, BaseSingleLoadedListener<CategoriesResponse> loadedListener) {
+        super(context);
         this.loadedListener = loadedListener;
     }
 

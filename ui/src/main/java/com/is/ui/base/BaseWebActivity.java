@@ -3,9 +3,9 @@ package com.is.ui.base;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
+import com.is.common.CommonUtils;
 import com.is.ui.R;
 import com.is.ui.netstatus.NetUtils;
-import com.is.ui.util.CommonUtils;
 import com.is.ui.widget.BrowserLayout;
 
 import butterknife.ButterKnife;

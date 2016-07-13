@@ -1,11 +1,11 @@
 package com.is.see.base;
 
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 
-
+import com.is.common.StringUtils;
 import com.is.see.R;
 import com.is.see.mvp.view.BaseView;
+import com.is.see.util.ProgressDialog;
 import com.is.ui.base.BaseAppCompatActivity;
 import com.is.ui.netstatus.NetUtils;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends BaseAppCompatActivity implements BaseView {
 
     protected Toolbar mToolbar;
-
+    private ProgressDialog progressDialog;
     @Override
     public void setContentView(int layoutResID) {
         super.setContentView(layoutResID);
@@ -57,12 +57,25 @@ public abstract class BaseActivity extends BaseAppCompatActivity implements Base
 
     @Override
     public void showLoading(String msg) {
-        Log.e(TAG_LOG,"showLoading");
+        if (progressDialog==null) {
+            if(StringUtils.StringIsEmpty(msg)){
+                progressDialog=new ProgressDialog(mContext,getString(R.string.please_later_on));
+                progressDialog.show();
+            }else {
+                progressDialog=new ProgressDialog(mContext,msg);
+                progressDialog.show();
+            }
+        }else {
+            progressDialog.show();
+        }
     }
 
     @Override
     public void hideLoading() {
-        Log.e(TAG_LOG,"hideLoading");
+        if (progressDialog!=null) {
+            progressDialog.dismiss();
+            progressDialog=null;
+        }
     }
 
     @Override

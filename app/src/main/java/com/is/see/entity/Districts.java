@@ -1,15 +1,24 @@
 package com.is.see.entity;
 
+import com.orm.SugarRecord;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by George on 2016/6/15.
  */
-public class Districts {
+public class Districts extends SugarRecord implements Serializable {
 
     private String district_name;
     private int district_id;
     private List<BizAreas> biz_areas;
+
+    public Districts(String district_name, int district_id, List<BizAreas> biz_areas) {
+        this.district_name = district_name;
+        this.district_id = district_id;
+        this.biz_areas = biz_areas;
+    }
 
     public String getDistrict_name() {
         return district_name;

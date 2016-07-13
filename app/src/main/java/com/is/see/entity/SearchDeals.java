@@ -1,11 +1,14 @@
 package com.is.see.entity;
 
+import com.orm.SugarRecord;
+
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by George on 2016/6/15.
  */
-public class SearchDeals {
+public class SearchDeals extends SugarRecord implements Serializable {
 
         private int deal_id;
         private String image;
@@ -27,7 +30,29 @@ public class SearchDeals {
         private String deal_murl;
         private List<ShopsInSearchDeals> shops;
 
-        public int getDeal_id() {
+    public SearchDeals(int deal_id, String image, String tiny_image, String title, String description, int market_price, int current_price, int promotion_price, int sale_num, double score, int comment_num, int publish_time, int purchase_deadline, boolean is_reservation_required, int distance, int shop_num, String deal_url, String deal_murl, List<ShopsInSearchDeals> shops) {
+        this.deal_id = deal_id;
+        this.image = image;
+        this.tiny_image = tiny_image;
+        this.title = title;
+        this.description = description;
+        this.market_price = market_price;
+        this.current_price = current_price;
+        this.promotion_price = promotion_price;
+        this.sale_num = sale_num;
+        this.score = score;
+        this.comment_num = comment_num;
+        this.publish_time = publish_time;
+        this.purchase_deadline = purchase_deadline;
+        this.is_reservation_required = is_reservation_required;
+        this.distance = distance;
+        this.shop_num = shop_num;
+        this.deal_url = deal_url;
+        this.deal_murl = deal_murl;
+        this.shops = shops;
+    }
+
+    public int getDeal_id() {
             return deal_id;
         }
 

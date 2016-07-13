@@ -12,8 +12,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
 
+import com.is.common.DisplayUtil;
 import com.is.ui.R;
-import com.is.ui.util.DisplayUtil;
 
 import java.util.ArrayList;
 import java.util.List;
