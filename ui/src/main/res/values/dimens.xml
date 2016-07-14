@@ -3,5 +3,6 @@
     <dimen name="tabhostHeight">48dp</dimen>
     <dimen name="tabSelectorHeight">2dp</dimen>
     <dimen name="materialTextTab">14sp</dimen>
-    
+    <dimen name="list_padding">0dp</dimen>
+    <dimen name="list_item_padding">16dp</dimen>
 </resources>

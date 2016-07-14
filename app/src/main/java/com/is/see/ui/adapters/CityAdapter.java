@@ -6,10 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import me.yokeyword.indexablelistview.IndexableAdapter;
-
 import com.is.see.R;
 import com.is.see.entity.Cities;
+
+import me.yokeyword.indexablelistview.IndexableAdapter;
 
 /**
  * Created by YoKeyword on 16/3/20.
@@ -24,7 +24,7 @@ public class CityAdapter extends IndexableAdapter<Cities> {
     @Override
     protected TextView onCreateTitleViewHolder(ViewGroup parent) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_tv_title_city, parent, false);
-        return (TextView) view.findViewById(R.id.tv_title);
+        return (TextView) view.findViewById(R.id.tv_title_city);
     }
 
     @Override

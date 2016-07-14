@@ -76,7 +76,6 @@ public class PickCityActivity extends BaseActivity implements CitiesView {
         mIndexableStickyListView.setAdapter(mAdapter);
 
 
-
         // 添加定位城市Header
         ArrayList<Cities> gpsIndexEntityList = new ArrayList<>();
         final Cities gpsEntity = new Cities("定位中...",-1,"杭州市","杭州市","pinyin","pinyin");

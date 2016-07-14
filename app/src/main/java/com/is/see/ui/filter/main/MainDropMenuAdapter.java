@@ -1,4 +1,4 @@
-package com.is.see.ui.adapters;
+package com.is.see.ui.filter.main;
 
 import android.content.Context;
 import android.view.View;
@@ -9,7 +9,9 @@ import com.is.see.entity.BizAreas;
 import com.is.see.entity.Categories;
 import com.is.see.entity.Districts;
 import com.is.see.entity.Subcategories;
-import com.is.see.ui.filter.entity.FilterUrl;
+import com.is.see.ui.filter.main.MainFilter;
+import com.is.see.ui.filter.main.Radius;
+import com.is.see.ui.filter.main.Sort;
 import com.is.ui.filter.adapter.MenuAdapter;
 import com.is.ui.filter.adapter.SimpleTextAdapter;
 import com.is.ui.filter.interfaces.OnFilterDoneListener;
@@ -80,10 +82,10 @@ public class MainDropMenuAdapter implements MenuAdapter{
                 }
                 break;
             case 2:
-                view=createSingleListView();
+                view=createSortListView();
                 break;
             case 3:
-                view=createSingleListView();
+                view=createRadiusListView();
                 break;
         }
         return view;
@@ -117,11 +119,11 @@ public class MainDropMenuAdapter implements MenuAdapter{
                     public List<Subcategories> provideRightList(Categories categories, int position) {
                         List<Subcategories> child=categories.getSubcategories();
                         if (CommonUtil.isEmpty(child)) {
-                            FilterUrl.instance().doubleListLeft = categories.getCat_name();
-                            FilterUrl.instance().doubleListRight = "";
+                            MainFilter.instance().cat_id = categories.getCat_id();
+                            MainFilter.instance().subcat_id = 0;
 
-                            FilterUrl.instance().position = 0;
-                            FilterUrl.instance().positionTitle = categories.getCat_name();
+                            MainFilter.instance().position = 0;
+                            MainFilter.instance().positionTitle = categories.getCat_name();
 
                             onFilterDone();
                         }
@@ -130,11 +132,11 @@ public class MainDropMenuAdapter implements MenuAdapter{
                 }).onRightItemClickListener(new DoubleListView.OnRightItemClickListener<Categories, Subcategories>() {
                     @Override
                     public void onRightItemClick(Categories categories, Subcategories subcategories) {
-                        FilterUrl.instance().doubleListLeft = categories.getCat_name();
-                        FilterUrl.instance().doubleListRight = subcategories.getSubcat_name();
+                        MainFilter.instance().cat_id = categories.getCat_id();
+                        MainFilter.instance().subcat_id = subcategories.getSubcat_id();
 
-                        FilterUrl.instance().position = 0;
-                        FilterUrl.instance().positionTitle = subcategories.getSubcat_name();
+                        MainFilter.instance().position = 0;
+                        MainFilter.instance().positionTitle = subcategories.getSubcat_name();
 
                         onFilterDone();
                     }
@@ -173,11 +175,11 @@ public class MainDropMenuAdapter implements MenuAdapter{
                     public List<BizAreas> provideRightList(Districts districts, int position) {
                         List<BizAreas> child=districts.getBiz_areas();
                         if (CommonUtil.isEmpty(child)) {
-                            FilterUrl.instance().doubleListLeft = districts.getDistrict_name();
-                            FilterUrl.instance().doubleListRight = "";
+                            MainFilter.instance().district_id = districts.getDistrict_id();
+                            MainFilter.instance().biz_area_id = 0;
 
-                            FilterUrl.instance().position = 1;
-                            FilterUrl.instance().positionTitle = districts.getDistrict_name();
+                            MainFilter.instance().position = 1;
+                            MainFilter.instance().positionTitle = districts.getDistrict_name();
 
                             onFilterDone();
                         }
@@ -186,11 +188,11 @@ public class MainDropMenuAdapter implements MenuAdapter{
                 }).onRightItemClickListener(new DoubleListView.OnRightItemClickListener<Districts, BizAreas>() {
                     @Override
                     public void onRightItemClick(Districts districts, BizAreas bizAreas) {
-                        FilterUrl.instance().doubleListLeft = districts.getDistrict_name();
-                        FilterUrl.instance().doubleListRight = bizAreas.getBiz_area_name();
+                        MainFilter.instance().district_id = districts.getDistrict_id();
+                        MainFilter.instance().biz_area_id = bizAreas.getBiz_area_id();
 
-                        FilterUrl.instance().position = 1;
-                        FilterUrl.instance().positionTitle = bizAreas.getBiz_area_name();
+                        MainFilter.instance().position = 1;
+                        MainFilter.instance().positionTitle = bizAreas.getBiz_area_name();
 
                         onFilterDone();
                     }
@@ -202,12 +204,12 @@ public class MainDropMenuAdapter implements MenuAdapter{
         return districtsDropMenu;
     }
 
-    private View createSingleListView() {
-        SingleListView<String> singleListView = new SingleListView<String>(mContext)
-                .adapter(new SimpleTextAdapter<String>(null, mContext) {
+    private View createSortListView() {
+        SingleListView<Sort> singleListView = new SingleListView<Sort>(mContext)
+                .adapter(new SimpleTextAdapter<Sort>(null, mContext) {
                     @Override
-                    public String provideText(String string) {
-                        return string;
+                    public String provideText(Sort sort) {
+                        return sort.getName();
                     }
 
                     @Override
@@ -216,27 +218,70 @@ public class MainDropMenuAdapter implements MenuAdapter{
                         checkedTextView.setPadding(dp, dp, 0, dp);
                     }
                 })
-                .onItemClick(new OnFilterItemClickListener<String>() {
+                .onItemClick(new OnFilterItemClickListener<Sort>() {
                     @Override
-                    public void onItemClick(String item) {
-                        FilterUrl.instance().singleListPosition = item;
+                    public void onItemClick(Sort item) {
+                        MainFilter.instance().sort = item.getSort();
 
-                        FilterUrl.instance().position = 0;
-                        FilterUrl.instance().positionTitle = item;
+                        MainFilter.instance().position = 2;
+                        MainFilter.instance().positionTitle = item.getName();
 
                         onFilterDone();
                     }
                 });
 
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
-            list.add("" + i);
+        List<Sort> list = new ArrayList<>();
+        String[] strings=new String[]{"综合排序","价格低优先","价格高优先","折扣高优先","销量高优先","用户坐标距离近优先","最新发布优先","用户评分高优先"};
+        for (int i = 0; i < 8; ++i) {
+            Sort sort=new Sort();
+            sort.setSort(i);
+            sort.setName(strings[i]);
+            list.add(sort);
         }
         singleListView.setList(list, -1);
 
         return singleListView;
     }
 
+    private View createRadiusListView() {
+        SingleListView<Radius> singleListView = new SingleListView<Radius>(mContext)
+                .adapter(new SimpleTextAdapter<Radius>(null, mContext) {
+                    @Override
+                    public String provideText(Radius radius) {
+                        return radius.getName();
+                    }
+
+                    @Override
+                    protected void initCheckedTextView(FilterCheckedTextView checkedTextView) {
+                        int dp = UIUtil.dp(mContext, 15);
+                        checkedTextView.setPadding(dp, dp, 0, dp);
+                    }
+                })
+                .onItemClick(new OnFilterItemClickListener<Radius>() {
+                    @Override
+                    public void onItemClick(Radius item) {
+                        MainFilter.instance().radius = item.getRadius();
+
+                        MainFilter.instance().position = 3;
+                        MainFilter.instance().positionTitle = item.getName();
+
+                        onFilterDone();
+                    }
+                });
+
+        List<Radius> list = new ArrayList<>();
+        int[] radius=new int[]{500,1000,3000,5000,10000};
+        String[] names=new String[]{"500米","1000米","3000米","5000米","10000米"};
+        for (int i = 0; i < 5; ++i) {
+            Radius radius1=new Radius();
+            radius1.setRadius(radius[i]);
+            radius1.setName(names[i]);
+            list.add(radius1);
+        }
+        singleListView.setList(list, -1);
+
+        return singleListView;
+    }
 
     private void onFilterDone() {
         if (onFilterDoneListener != null) {

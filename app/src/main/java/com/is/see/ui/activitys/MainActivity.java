@@ -11,8 +11,8 @@ import com.is.see.mvp.presenter.CategoriesPresenterImpl;
 import com.is.see.mvp.presenter.DistrictsPresenterImpl;
 import com.is.see.mvp.view.CategoriesView;
 import com.is.see.mvp.view.DistrictsView;
-import com.is.see.ui.adapters.MainDropMenuAdapter;
-import com.is.see.ui.filter.entity.FilterUrl;
+import com.is.see.ui.filter.main.MainDropMenuAdapter;
+import com.is.see.ui.filter.main.MainFilter;
 import com.is.ui.filter.DropDownMenu;
 import com.is.ui.filter.interfaces.OnFilterDoneListener;
 
@@ -33,6 +33,13 @@ public class MainActivity extends BaseActivity implements OnFilterDoneListener,C
     private List<Districts> districts;
     private MainDropMenuAdapter mainDropMenuAdapter;
     int you;
+
+    private String location;
+    private String keyword;
+    private int page=1;
+    private int page_size=1;
+    private int is_reservation_required=1;
+
     @Override
     protected void getBundleExtras(Bundle extras) {
 
@@ -58,7 +65,7 @@ public class MainActivity extends BaseActivity implements OnFilterDoneListener,C
     }
 
     private void initFilterDropDownView() {
-        String[] titleList = new String[]{"第一个", "第二个", "第三个", "第四个"};
+        String[] titleList = new String[]{"分类", "商圈", "排序", "距离"};
         mainDropMenuAdapter=new MainDropMenuAdapter(mContext,this,titleList);
         mainDropMenuAdapter.setDistrictsList(districts);
         mainDropMenuAdapter.setCategoriesList(categories);
@@ -67,10 +74,11 @@ public class MainActivity extends BaseActivity implements OnFilterDoneListener,C
     @Override
     public void onFilterDone(int position, String positionTitle, String urlValue) {
         if (position != 3) {
-            dropDownMenu.setPositionIndicatorText(FilterUrl.instance().position, FilterUrl.instance().positionTitle);
+            dropDownMenu.setPositionIndicatorText(MainFilter.instance().position, MainFilter.instance().positionTitle);
         }
         dropDownMenu.close();
-        mFilterContentView.setText(FilterUrl.instance().toString());
+
+        mFilterContentView.setText(MainFilter.instance().toString());
     }
 
     @Override
@@ -96,6 +104,7 @@ public class MainActivity extends BaseActivity implements OnFilterDoneListener,C
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FilterUrl.instance().clear();
+        you=0;
+        MainFilter.instance().clear();
     }
 }
