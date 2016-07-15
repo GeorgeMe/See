@@ -3,11 +3,16 @@ package com.is.see.base;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.TextUtils;
 
+import com.is.common.TLog;
+import com.is.common.XmlDB;
+import com.is.see.SeeConstant;
 import com.is.see.api.SeeApi;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -35,13 +40,17 @@ public class Retrofit2See {
         if (retrofit==null) {
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             /**
-             * 设置公共参数
+             * 设置Cookie
              */
-            builder.addInterceptor(addQueryParameterInterceptor());
+            builder.addInterceptor(addCookieInterceptor());
             /**
              * 设置头
              */
             builder.addInterceptor(addHeaderInterceptor());
+            /**
+             * 设置公共参数
+             */
+            builder.addInterceptor(addQueryParameterInterceptor());
             /**
              * 设置缓存
              */
@@ -80,26 +89,38 @@ public class Retrofit2See {
     }*/
 
     /**
-     * 设置公共参数
+     * 设置Cookie
      */
-    private static Interceptor addQueryParameterInterceptor() {
-        Interceptor addQueryParameterInterceptor = new Interceptor() {
+    private static Interceptor addCookieInterceptor(){
+        Interceptor cookieInterceptor=new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
-                Request originalRequest = chain.request();
-                Request request;
-                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
-                        // Provide your custom parameter here
-                        .addQueryParameter("platform", "android")
-                        .addQueryParameter("version", "1.0.0")
-                        .build();
-                request = originalRequest.newBuilder().url(modifiedUrl).build();
-                return chain.proceed(request);
+                Request original = chain.request();
+                if (!TextUtils.isEmpty(XmlDB.getInstance(mContext).getKeyString(SeeConstant.SEE_COOKIE,"")) && !original.url().toString().contains("loginUsernameEmail")) {
+                    Request request = original.newBuilder()
+                            .addHeader("Cookie", "u=" + XmlDB.getInstance(mContext).getKeyString(SeeConstant.SEE_COOKIE,"") + ";") // 不能转UTF-8
+                            .build();
+                    TLog.e("Cookie","okhttplog: set header cookie:" + XmlDB.getInstance(mContext).getKeyString(SeeConstant.SEE_COOKIE,""));
+                    TLog.e("Cookie","okhttplog: set header cookie:" + URLEncoder.encode(XmlDB.getInstance(mContext).getKeyString(SeeConstant.SEE_COOKIE,"")));
+                    return chain.proceed(request);
+                } else {
+                    for (String header : chain.proceed(original).headers("Set-Cookie")) {
+                        if (header.startsWith("u=")) {
+                            String cookie = header.split(";")[0].substring(2);
+                            TLog.e("Cookie","okhttplog: add cookie:" + cookie);
+                            if (!TextUtils.isEmpty(cookie)) {
+
+                                SeeConstant.Cookie = cookie;
+                                XmlDB.getInstance(mContext).saveKey(SeeConstant.SEE_COOKIE,cookie);
+                            }
+                        }
+                    }
+                }
+                return chain.proceed(original);
             }
         };
-        return addQueryParameterInterceptor;
+        return cookieInterceptor;
     }
-
     /**
      * 设置头
      */
@@ -120,6 +141,28 @@ public class Retrofit2See {
         };
         return headerInterceptor;
     }
+
+    /**
+     * 设置公共参数
+     */
+    private static Interceptor addQueryParameterInterceptor() {
+        Interceptor addQueryParameterInterceptor = new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request originalRequest = chain.request();
+                Request request;
+                HttpUrl modifiedUrl = originalRequest.url().newBuilder()
+                        // Provide your custom parameter here
+                        .addQueryParameter("platform", "android")
+                        .addQueryParameter("version", "1.0.0")
+                        .build();
+                request = originalRequest.newBuilder().url(modifiedUrl).build();
+                return chain.proceed(request);
+            }
+        };
+        return addQueryParameterInterceptor;
+    }
+
 
     /**
      * 设置缓存
