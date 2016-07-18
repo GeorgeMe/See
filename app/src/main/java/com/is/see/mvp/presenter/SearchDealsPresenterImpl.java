@@ -79,9 +79,12 @@ public class SearchDealsPresenterImpl implements BaseMultiLoadedListener<SearchD
         if (data.getErrno()!=0){
             searchDealsView.showError(data.getMsg());
         }else {
-            searchDealsView.onSearchDeals(data.getData());
+            if (event_tag==0){
+                searchDealsView.refreshListData(data.getData());
+            }else if (event_tag==1){
+                searchDealsView.addMoreListData(data.getData());
+            }
         }
-
     }
 
     @Override
