@@ -66,12 +66,10 @@ public class LoadMoreListView extends ListView implements OnScrollListener {
         super.setAdapter(adapter);
     }
 
-    public void onScroll(AbsListView view, int firstVisibleItem,
-                         int visibleItemCount, int totalItemCount) {
+    public void onScroll(AbsListView view, int firstVisibleItem,int visibleItemCount, int totalItemCount) {
 
         if (mOnScrollListener != null) {
-            mOnScrollListener.onScroll(view, firstVisibleItem,
-                    visibleItemCount, totalItemCount);
+            mOnScrollListener.onScroll(view, firstVisibleItem,visibleItemCount, totalItemCount);
         }
 
         if (mOnLoadMoreListener != null) {
@@ -82,11 +80,9 @@ public class LoadMoreListView extends ListView implements OnScrollListener {
                 return;
             }
 
-
             boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount;
 
-            if (!mIsLoadingMore && loadMore
-                    && mCurrentScrollState != SCROLL_STATE_IDLE) {
+            if (!mIsLoadingMore && loadMore && mCurrentScrollState != SCROLL_STATE_IDLE) {
                 if (!mCanLoadMore) {
                     mLabLoadMore.setVisibility(View.VISIBLE);
                     return;
@@ -96,8 +92,6 @@ public class LoadMoreListView extends ListView implements OnScrollListener {
                 mIsLoadingMore = true;
                 onLoadMore();
             }
-
-
         }
 
     }

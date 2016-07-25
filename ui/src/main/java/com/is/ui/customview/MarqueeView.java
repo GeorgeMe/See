@@ -17,7 +17,7 @@ import com.is.ui.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//俗名：垂直跑马灯；学名：垂直翻页公告。
 public class MarqueeView extends ViewFlipper {
 
     private Context mContext;

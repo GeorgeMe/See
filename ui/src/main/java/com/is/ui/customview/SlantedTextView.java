@@ -19,7 +19,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.is.ui.R;
-
+//一个倾斜的TextView,适用于标签效果。
 public class SlantedTextView extends View {
 
     public static final int MODE_LEFT = 0;

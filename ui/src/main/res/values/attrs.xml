@@ -144,4 +144,9 @@
         <item>@color/ball2</item>
         <item>@color/ball3</item>
     </integer-array>
+
+    <declare-styleable name="PasswordView">
+        <attr name="strikeThrough" format="boolean"/>
+        <attr name="eyeTint" format="color"/>
+    </declare-styleable>
 </resources>

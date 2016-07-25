@@ -22,9 +22,7 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
 
-/**
- * Created by Fabiomsr on 20/5/16.
- */
+//一个定制的TextView以不同格式显示的金额。
 public class MoneyTextView extends View {
 
     private static final int GRAVITY_START             = 1;
